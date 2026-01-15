@@ -1,7 +1,8 @@
 
 # What is good
 # What is bad
-
+# how it works
+# What are controls on the master station
 # Battery
 - accu ?
 - capacity ?
@@ -17,7 +18,7 @@
 - button prepare
 - master prepare
 
-# What are controls on the master station
+
 
 
 # False start
