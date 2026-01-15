@@ -19,3 +19,9 @@ https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/networ
 
 - ESPNOW User Guide:
 https://documentation.espressif.com/esp-now_user_guide_en.pdf
+
+## ESP8266
+
+https://forum.arduino.cc/t/programing-the-esp-12f/898023/6
+
+https://randomnerdtutorials.com/esp-now-esp8266-nodemcu-arduino-ide/
