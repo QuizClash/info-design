@@ -1,8 +1,12 @@
 
-# What is good
-# What is bad
 # how it works
 # What are controls on the master station
+# Preparation steps
+- button prepare
+- master prepare
+# What is good
+# What is bad
+
 # Battery
 - accu ?
 - capacity ?
@@ -14,16 +18,12 @@
 - master ?
 - button ?
 
-# Preparation steps
-- button prepare
-- master prepare
+# Wishes
 
-
-
-
-# False start
-# False finish
-# Phone
+## False start
+## Distance control of master
+## False finish
+## Phone
 - see result
 - show ad
 
