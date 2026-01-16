@@ -9,3 +9,7 @@ General information and tech design
 ## Architecture
 
 ![architecture](diagrams/QuizClash-Cloud.drawio.png)
+
+## Cloud Architecture
+
+![cloud architecture](diagrams/QuizCloud.drawio.png)
