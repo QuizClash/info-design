@@ -6,6 +6,6 @@ General information and tech design
 
 [proposal](WIP.md)
 
-## Architecture
+## Architecture Wearables
 
-![architecture](diagrams/QuizClash-Cloud.drawio.png)
+![architecture](diagrams/QuizClash-Wearables.drawio.png)
