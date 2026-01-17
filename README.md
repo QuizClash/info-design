@@ -9,3 +9,7 @@ General information and tech design
 ## Architecture Wearables
 
 ![architecture](diagrams/QuizClash-Wearables.drawio.png)
+
+## Cloud Architecture
+
+![cloud architecture](diagrams/QuizCloud.drawio.png)
