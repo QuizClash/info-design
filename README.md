@@ -12,4 +12,4 @@ General information and tech design
 
 ## Cloud Architecture
 
-![cloud architecture](diagrams/QuizCloud.drawio.png)
+![cloud architecture](diagrams/QuizClash-Cloud.drawio.png)
