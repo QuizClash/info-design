@@ -1,4 +1,4 @@
-
+# consider other, pure on-line options with a smartphone?
 # how it works
 # What are controls on the master station
 # Preparation steps
