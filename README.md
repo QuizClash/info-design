@@ -17,7 +17,7 @@ The master station is a microcontroller that runs on the ESP32 chip. It connects
 host computer via serial connection. The host computer is merely relaying the messages 
 from devices to the cloud. It allows controlling the game from the cloud.
 
-## Technologies
+## Technologies for the devices
 
 - ESP8266 for button devices
 - ESP32 for master station
@@ -25,7 +25,7 @@ from devices to the cloud. It allows controlling the game from the cloud.
 - Serial (USB-to-UART) between the master station and the host computer connected to the internet
 - HTTP between the host computer and the Quiz cloud
 
-## Architecture Devices
+## Overview Devices
 
 ![architecture](diagrams/QuizClash-Devices.drawio.png)
 
