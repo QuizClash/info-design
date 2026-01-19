@@ -2,11 +2,30 @@
 
 General information and tech design
 
-## Proposal
+## Overview
 
-[proposal](WIP.md)
+The QuizClash app is a quiz game that allows users to create and play quizzes.
+Each quiz has a set of questions, and the user can react by pressing a provided
+button device. The device will send a signal over ESP-NOW protocol to
+the master station. The user who presses the first wins the right to answer the
+question. The master station detects who was the first and sends a signal to the
+button devices to expose the winner.
+Moderator managers the quizzes and controls the master station. 
+The players can see the results of the quizzes and the statistics of the game with their smartphones.
 
-## Architecture Wearables
+The master station is a microcontroller that runs on the ESP32 chip. It connects to the 
+host computer via serial connection. The host computer is merely relaying the messages 
+from devices to the cloud. It allows controlling the game from the cloud.
+
+## Technologies
+
+- ESP8266 for button devices
+- ESP32 for master station
+- ESP-NOW protocol between devices
+- Serial (USB-to-UART) between the master station and the host computer connected to the internet
+- HTTP between the host computer and the Quiz cloud
+
+## Architecture Devices
 
 ![architecture](diagrams/QuizClash-Devices.drawio.png)
 
