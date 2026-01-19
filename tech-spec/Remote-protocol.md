@@ -12,7 +12,11 @@ The Quiz Hall server exposes the following endpoints:
 ## Authentication
 
 All the requests from the host are authenticated using the JWT token.
-The subject is 'Quiz-Clash.' The issuer is the host UUID.
+The host must send the JWT token in the standard header:
+```http
+Authorization: Bearer <JWT token>
+```
+The subject is 'QuizClash'. The issuer is the host UUID.
 The token might be generated using the following code:
 
 ```kotlin
