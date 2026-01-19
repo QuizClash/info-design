@@ -25,6 +25,12 @@ from devices to the cloud. It allows controlling the game from the cloud.
 - Serial (USB-to-UART) between the master station and the host computer connected to the internet
 - HTTP between the host computer and the Quiz cloud
 
+## Protocols
+
+- ESP-NOW protocol between devices
+- [Serial (USB-to-UART)](tech-spec/Serial-protocol.md)
+- [HTTP between the host computer and the Quiz cloud](/tech-spec/Remote-protocol.md)
+
 ## Overview Devices
 
 ![architecture](diagrams/QuizClash-Devices.drawio.png)
