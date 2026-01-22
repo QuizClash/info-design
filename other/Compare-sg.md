@@ -15,7 +15,7 @@
 - master ?
 
 # Sound
-- master ?
+- master ? to indicate start
 - button ?
 
 # Wishes
