@@ -28,7 +28,8 @@ from devices to the cloud. It allows controlling the game from the cloud.
 ## Protocols
 
 - ESP-NOW protocol between devices
-- [Serial (USB-to-UART)](tech-spec/Serial-protocol.md)
+- [Bluetooth](tech-spec/Companion-app-proxy.md) 
+- Outdated [Serial (USB-to-UART)](tech-spec/Serial-protocol.md)
 - [HTTP between the host computer and the Quiz cloud](/tech-spec/Remote-protocol.md)
 
 ## Overview Devices
