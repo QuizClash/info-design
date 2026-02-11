@@ -1,4 +1,6 @@
-# Phone-as-gateway architecture or Companion app proxy pattern
+# Companion app proxy pattern
+
+Mobile app (Companion app proxy) is merely relaying the messages from devices to the cloud (and back)
 
 ESP32 → BLE → Phone → Server
 
@@ -11,6 +13,7 @@ Mobile app:
 - connects over BLE
 - reads/writes UART-like data
 - forwards to server
+- use long-polling to receive commands from the cloud
 
 This solution:
 - ✅ Works well on both Android and iOS
