@@ -4,8 +4,8 @@ General information and tech design
 
 ## Overview
 
-The QuizClash application is a quiz game that allows users to create and play quizzes with a moderator.
-A few players form a team, and they have to answer questions after a start is announced by the moderator.
+The QuizClash application is a quiz game that allows players to create and play quizzes with a moderator.
+A few players form a team (as TeamMember), and they have to answer questions after a start is announced by the moderator.
 The captain of the team indicates the readiness to answer. The moderator can see the sequence 
 in which captains indicated their readiness and choose the one to answer.
 The chosen team gives an answer to the question.
@@ -15,7 +15,7 @@ Roles:
 - moderator: the person who creates and manages the quizzes and teams
 - teams: the players who play the quizzes
 - captain: the person who indicates an answer
-- players: the players who play the quizzes and help the captain answer the questions
+- team member: the users who play the quizzes and help the captain answer the questions
 
 ### Roles
 
@@ -35,7 +35,7 @@ Team:
 Captain:
 - indicates the readiness to answer a question
 
-Players:
+Team Member:
 - answer questions
 - observe the results of when other teams indicated their readiness
 
