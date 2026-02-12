@@ -17,6 +17,8 @@ Roles:
 - captain: the person who is buzzing in
 - team member: the users who play the quizzes and help the captain answer the questions
 
+The game is described in the [Game](Game.md) section.
+
 ### Roles
 
 Moderator is driving the whole game:
