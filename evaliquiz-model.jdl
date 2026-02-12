@@ -1,0 +1,189 @@
+application {
+  config {
+    baseName quizengine
+    applicationType monolith
+    packageName com.github.quizclash
+    authenticationType jwt
+    buildTool maven
+    databaseType sql
+    prodDatabaseType postgresql
+    devDatabaseType postgresql
+    clientFramework react
+    cacheProvider no
+    enableHibernateCache false
+    enableTranslation true
+    nativeLanguage en
+    languages [en,nl]
+    reactive false
+  }
+}
+
+/* =======================
+   ENUMS
+======================= */
+
+enum GameStatus {
+  IN_PROGRESS,
+  FINISHED,
+  ABANDONED
+}
+
+enum RoundStatus {
+  IDLE,
+  READY,
+  STARTED,
+  FINISHED
+}
+
+/* =======================
+   ENTITIES
+======================= */
+
+/** An identity to run Quiz  */
+entity ModeratorProfile {
+  telegram String required
+}
+
+entity Quiz {
+  createdAt Instant required
+  title String required
+  description TextBlob
+}
+
+entity Question {
+  orderIndex Integer required
+  title String
+  text TextBlob
+  /* Hint is only shown to the moderator */
+  hint TextBlob
+}
+
+/** A group of players that participates in quizzes together */
+entity Team {
+  index Integer required
+  name String
+}
+
+/** A user's membership in a team */
+entity TeamMember {
+  /** Whether this member answers on behalf of the team */
+  captain Boolean required
+  name String
+}
+
+entity Game {
+  startedAt Instant required
+  status GameStatus required
+  /* timeout to wait for the reaction during round */
+  roundTimeout Integer required
+  finishedAt Instant
+}
+
+entity Round {
+  status RoundStatus required
+  startedAt Instant
+  finishedAt Instant
+  orderIndex Integer required
+}
+
+entity Attempt {
+  /* The moment when it was received */
+  receivedAt Instant required
+  /* The reaction delay reported by a button, when comes from the button */
+  reaction Integer
+  /* Whether the moderator selected this captain to answer */
+  chosen Boolean
+  /* Whether the moderator judged the answer as correct. Null when not yet evaluated. */
+  correct Boolean
+}
+
+/** Software installed on phone or host which has physically connected master station */
+entity Companion {
+  /** Communicated in lower case */
+  uuid UUID required
+  name String required
+  /** UUID 4 as secret */
+  secret String required maxlength(36)
+  /** The version of the installed software package */
+  edition Integer
+  /** General description */
+  description String
+}
+
+/* =======================
+   RELATIONSHIPS
+======================= */
+
+relationship OneToOne {
+  ModeratorProfile {person required} to User with builtInEntity
+}
+
+relationship OneToMany {
+  ModeratorProfile{companions} to Companion{owner required}
+}
+
+relationship OneToMany {
+  ModeratorProfile{quizzes} to Quiz{author required}
+}
+
+relationship OneToMany {
+  Quiz{questions} to Question{quiz required}
+}
+
+/* --- Team structure --- */
+
+relationship OneToMany {
+  Team{members} to TeamMember{team required}
+}
+
+/* --- Game --- */
+
+relationship OneToMany {
+  Quiz{games} to Game{quiz}
+}
+
+relationship OneToMany {
+  /** A team is only for one game */
+  Game{teams} to Team{game required}
+}
+
+/* Companion does not need to list games */
+relationship ManyToOne {
+  Game{companion} to Companion
+}
+
+relationship OneToMany {
+  Game{rounds} to Round{game required}
+}
+
+relationship OneToMany {
+  Team{attempts} to Attempt{team required}
+}
+
+relationship ManyToOne {
+  Round{question} to Question
+}
+
+relationship OneToMany {
+  Round{attempts} to Attempt{round required}
+}
+
+/* =======================
+   OPTIONS
+======================= */
+
+dto Quiz, Question, Game, Team, TeamMember with mapstruct
+service Quiz, Question, Game, Team with serviceClass
+paginate Quiz, Question, Game, Team with pagination
+filter Quiz, Question, Game, Team
+
+/*
+  Business rules to enforce in service code (not expressible in JDL):
+  1. Exactly one captain per team
+  2. Minimum one member per team
+  3. Only the captain may submit answers
+  4. Attempt.correct can only be set when Attempt.chosen is true
+  5. Round status transitions: IDLE -> READY -> STARTED -> FINISHED
+  6. Round.startedAt is set when status transitions to STARTED
+  7. Round.finishedAt is set when status transitions to FINISHED
+*/
