@@ -1,10 +1,10 @@
 # General info
 
-General information and tech design
+Evaliquiz - General information and tech design
 
 ## Overview
 
-The QuizClash application is a quiz game that allows players to create and play quizzes with a moderator.
+The Evaliquiz application is a quiz game that allows players to create and play quizzes with a moderator.
 A few players form a team (as TeamMember), and they have to answer questions after a start is announced by the moderator.
 The teams choose a captain who will be buzzing in to indicate their readiness to answer.
 The moderator can see the sequence in which captains buzzed in and choose the one to answer.
@@ -52,8 +52,8 @@ configured before the game starts.
 
 ## Overview Use case
 
-![use-case](diagrams/QuizClash-UseCase.drawio.png)
+![use-case](diagrams/Evaliquiz-UseCase.drawio.png)
 
 ## Cloud Architecture
 
-![cloud architecture](diagrams/QuizClash-Cloud.drawio.png)
+![cloud architecture](diagrams/Evaliquiz-Cloud.drawio.png)

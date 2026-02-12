@@ -20,7 +20,7 @@ configured to play.
 This stage is done only once when a user decides to join the project.
 The user should register as a moderator and configure buzzers if needed.
 
-- Go to the [registration page](https://t.me/QuizClashModeratorBot)
+- Go to the [registration page](https://t.me/EvaliquizModeratorBot)
 - Register as a moderator
 - Configure buzzers if needed
 
@@ -29,7 +29,7 @@ TODO: describe the buzzers
 ## Quiz preparation
 
 This stage is done independent of any game.
-The moderator via a mini-app in QuizClashModeratorBot can do the following actions:
+The moderator via a mini-app in EvaliquizModeratorBot can do the following actions:
 - Create a new quiz (quiz has a mandatory title and an optional description)
 - Add questions to the quiz (a question has title, text and hint only shown to the moderator)
 - Edit existing quiz
@@ -43,7 +43,7 @@ TODO Configure a companion
 
 ## Create Game
 
-The moderator via a mini-app in QuizClashModeratorBot can do the following actions:
+The moderator via a mini-app in EvaliquizModeratorBot can do the following actions:
 - Create a new game
 - Assign an existing quiz to the game (optional)
 - If buzzers are expected, select the companion to use for this game
@@ -62,7 +62,7 @@ The moderator can do the following actions:
 
 The teams are introduced to the game by the moderator. The captains may press the buzzer to test how it works.
 
-The moderator via a mini-app in QuizClashModeratorBot can do the following actions:
+The moderator via a mini-app in EvaliquizModeratorBot can do the following actions:
 - order any buzzer to blink
 - order a test run of the game (captains and teams can see how it works)
 

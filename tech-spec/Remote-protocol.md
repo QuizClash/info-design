@@ -16,7 +16,7 @@ The host must send the JWT token in the standard header:
 ```http
 Authorization: Bearer <JWT token>
 ```
-The subject is 'QuizClash'. The issuer is the host UUID.
+The subject is 'Evaliquiz'. The issuer is the host UUID.
 The token might be generated using the following code:
 
 ```kotlin
