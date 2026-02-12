@@ -1,8 +1,12 @@
+/* JHipster Domain Language (JDL)
+ * https://www.jhipster.tech/jdl/intro
+*/
+
 application {
   config {
-    baseName quizengine
+    baseName backbone
     applicationType monolith
-    packageName com.github.quizclash
+    packageName com.github.evaliquiz
     authenticationType jwt
     buildTool maven
     databaseType sql
