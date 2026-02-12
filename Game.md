@@ -68,5 +68,19 @@ The moderator via a mini-app in EvaliquizModeratorBot can do the following actio
 
 ## Gameplay
 
-TODO
+The game consists of rounds.
+The round has the following states:
+- idle (buzzing in causes green blinking)
+- ready (buzzing in is a false start, red blinking, and the round is skipped unless allowed by the moderator)
+- started (buzzing in indicates the readiness to answer)
+  
+The moderator via a mini-app in EvaliquizModeratorBot can choose the state of the round.
+The moderator selects 'ready' and reads the question.
+The moderator selects 'started' and waits for the captains to answer.
+The started round finishes when all the captains pressed the buzzer or timeout is reached.
+The moderator can see the sequence of the captains.
+The moderator can choose which captain is to answer the question.
+When the answer was wrong, the moderator may either repeat the same question in another round
+or select another captain to answer.
+
 
