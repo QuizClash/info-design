@@ -1,9 +1,9 @@
 # Hardware devices
 
-The captain can react by pressing a provided button device.
-The device will send a signal over ESP-NOW protocol to
+The captain can react by pressing a provided button device (buzzing in).
+The device (buzzer) will send a signal over ESP-NOW protocol to
 the master station. The master station will send the signal via the companion to the cloud.
-Moderator can see the time when each captain indicated the readiness (or no answer within the timeout).
+Moderator can see the time when each captain sent an attempt (or no answer within the timeout).
 
 ## Technologies for the devices
 
@@ -18,4 +18,4 @@ Moderator can see the time when each captain indicated the readiness (or no answ
 
 - ESP-NOW protocol between devices
 - Either [Bluetooth](tech-spec/Companion-app-proxy.md) or [Serial (USB-to-UART)](tech-spec/Serial-protocol.md)
-- [HTTP between the host computer or companion and the Quiz cloud](/tech-spec/Remote-protocol.md)
+- [HTTP between the host computer or companion and the Quiz cloud](/buzzer-spec/Remote-protocol.md)

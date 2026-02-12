@@ -1,6 +1,8 @@
 # Host to Quiz Hall communication
 
-Description of the communication protocol between Host and the Quiz Hall server.
+TODO: to be written
+
+Description of the communication protocol between Companion/Host and the Quiz Hall server.
 
 ## Endpoints
 

@@ -48,7 +48,7 @@ Captains may use either a physical button (buzzer) or a smartphone Telegram mini
 
 Buzzers and master station are optional for the game. When used, it must be connected and
 configured before the game starts.
-[Hardware devices](tech-spec/Devices.md) make the game more attractive.
+[Hardware devices](buzzer-spec/Devices.md) make the game more attractive.
 
 ## Overview Use case
 
