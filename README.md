@@ -54,6 +54,3 @@ configured before the game starts.
 
 ![use-case](diagrams/Evaliquiz-UseCase.drawio.png)
 
-## Cloud Architecture
-
-![cloud architecture](diagrams/Evaliquiz-Cloud.drawio.png)
