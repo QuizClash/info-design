@@ -1,4 +1,4 @@
-# General info
+# Evaliquiz
 
 Evaliquiz - General information and tech design
 
