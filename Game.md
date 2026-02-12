@@ -72,7 +72,7 @@ The game consists of rounds.
 The round has the following states:
 - idle (buzzing in causes green blinking)
 - ready (buzzing in is a false start, red blinking, and the round is skipped unless allowed by the moderator)
-- started (buzzing in indicates the readiness to answer)
+- started (buzzing in indicates a valid attempt to answer the question)
   
 The moderator via a mini-app in EvaliquizModeratorBot can choose the state of the round.
 The moderator selects 'ready' and reads the question.

@@ -14,7 +14,7 @@ Moderator takes the answer and decides if it was right or wrong.
 Roles:
 - moderator: the person who creates and manages the quizzes and teams
 - teams: the players who play the quizzes
-- captain: the person who is buzzing in
+- captain: the person who is buzzing in (sends an attempt)
 - team member: the users who play the quizzes and help the captain answer the questions
 
 The game is described in the [Game](Game.md) section.
@@ -27,7 +27,7 @@ Moderator is driving the whole game:
 - designates captains for each team
 - announces the questions and the start of each question
 - decides who will answer the question
-- decides if the answer was right or wrong
+- decides if the attempt to answer was right or wrong
 - takes the results of the questions and displays them
 
 Team:
