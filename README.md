@@ -43,6 +43,7 @@ Captain:
 - buzzes in
 
 Team Member:
+- it is anonymous, and it is not connected to its Telegram ID
 - answer questions
 - observe the results of buzzing in
 

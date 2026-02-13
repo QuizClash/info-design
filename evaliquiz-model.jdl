@@ -27,8 +27,11 @@ application {
 ======================= */
 
 enum GameStatus {
+  CREATED,
+  /* IN_PROGRESS means the game can run rounds */
   IN_PROGRESS,
   FINISHED,
+  /* ABANDONED means canceled at any stage */
   ABANDONED
 }
 
