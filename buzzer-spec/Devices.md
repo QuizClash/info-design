@@ -17,5 +17,5 @@ Moderator can see the time when each captain sent an attempt (or no answer withi
 ## Protocols
 
 - ESP-NOW protocol between devices
-- Either [Bluetooth](tech-spec/Companion-app-proxy.md) or [Serial (USB-to-UART)](tech-spec/Serial-protocol.md)
-- [HTTP between the host computer or companion and the Quiz cloud](/buzzer-spec/Remote-protocol.md)
+- Either [Bluetooth](Companion-app-proxy.md) or [Serial (USB-to-UART)](Serial-protocol.md)
+- [HTTP between the host computer or companion and the Quiz cloud](Remote-protocol.md)
