@@ -49,6 +49,9 @@ The moderator via a mini-app in EvaliquizModeratorBot can do the following actio
 - If buzzers are expected, select the companion to use for this game
 
 When no quiz was assigned, the game goes with ad-hoc questions.
+The moderator enters ad-hoc questions at the start of each round.
+They are stored as text on the Round itself (`Round.questionText`) and cannot be selected from the database.
+When a quiz is assigned, the round references a pre-made `Question` entity instead.
 
 ## In-place buzzer preparation
 

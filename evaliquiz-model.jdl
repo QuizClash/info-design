@@ -91,6 +91,8 @@ entity Round {
   startedAt Instant
   finishedAt Instant
   orderIndex Integer required
+  /* Ad-hoc question text entered by the moderator when the game has no quiz */
+  questionText String
 }
 
 entity Attempt {
@@ -171,6 +173,11 @@ relationship OneToMany {
   Team{attempts} to Attempt{team required}
 }
 
+/*
+ * Round.question is set only when Game.quiz is present (pre-made quiz).
+ * When Game.quiz is null (ad-hoc game), Round.questionText is used instead.
+ * Ad-hoc questions cannot be selected from the database.
+ */
 relationship ManyToOne {
   Round{question} to Question
 }
@@ -197,4 +204,7 @@ filter Quiz, Question, Game, Round, Attempt, Team
   5. Round status transitions: IDLE -> READY -> STARTED -> FINISHED
   6. Round.startedAt is set when status transitions to STARTED
   7. Round.finishedAt is set when status transitions to FINISHED
+  8. Round.question and Round.questionText are mutually exclusive:
+     - When Game.quiz is set: Round.question must reference a Question from that quiz; Round.questionText must be null
+     - When Game.quiz is null: Round.questionText is used; Round.question must be null
 */
