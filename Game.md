@@ -86,4 +86,8 @@ The moderator can choose which captain is to answer the question.
 When the answer was wrong, the moderator may either repeat the same question in another round
 or select another captain to answer.
 
+## Scoring
 
+The system does not enforce any scoring rules.
+The score is completely driven and determined by the moderator outside the application.
+The application only records attempts and the moderator's judgment (`Attempt.chosen` and `Attempt.correct`).
