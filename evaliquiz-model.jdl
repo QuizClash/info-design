@@ -143,6 +143,10 @@ relationship OneToMany {
 /* --- Game --- */
 
 relationship OneToMany {
+   ModeratorProfile{games} to Game{moderator required}
+}
+
+relationship OneToMany {
   Quiz{games} to Game{quiz}
 }
 
@@ -176,10 +180,10 @@ relationship OneToMany {
    OPTIONS
 ======================= */
 
-dto Quiz, Question, Game, Team, TeamMember with mapstruct
-service Quiz, Question, Game, Team with serviceClass
-paginate Quiz, Question, Game, Team with pagination
-filter Quiz, Question, Game, Team
+dto Quiz, Question, Game, Round, Attempt, Team, TeamMember, Companion, ModeratorProfile with mapstruct
+service Quiz, Question, Game, Round, Attempt, Team, Companion, ModeratorProfile with serviceClass
+paginate Quiz, Question, Game, Round, Attempt, Team with pagination
+filter Quiz, Question, Game, Round, Attempt, Team
 
 /*
   Business rules to enforce in service code (not expressible in JDL):
