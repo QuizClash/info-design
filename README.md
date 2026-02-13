@@ -12,6 +12,7 @@ The chosen team gives an answer to the question.
 Moderator takes the answer and decides if it was right or wrong.
 
 Roles:
+- admin: manages the system, does not play the games
 - moderator: the person who creates and manages the quizzes and teams
 - teams: the players who play the quizzes
 - captain: the person who is buzzing in (sends an attempt)
@@ -20,6 +21,11 @@ Roles:
 The game is described in the [Game](Game.md) section.
 
 ### Roles
+
+Admin:
+- maintains the system
+- the UI for admin may be implemented as JHipster administrator UI
+- cannot be either a moderator or a team member
 
 Moderator is driving the whole game:
 - creates and manages the quizzes and questions
@@ -50,7 +56,7 @@ Buzzers and master station are optional for the game. When used, it must be conn
 configured before the game starts.
 [Hardware devices](buzzer-spec/Devices.md) make the game more attractive.
 
-## Overview Use case
+## System Topology 
 
-![use-case](diagrams/Evaliquiz-UseCase.drawio.png)
+![system topology](diagrams/Evaliquiz-System.drawio.png)
 
