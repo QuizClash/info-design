@@ -1,3 +1,5 @@
+> **Out of scope for code generation.** This is a raw brainstorm in Russian about button hardware design. Not a formal specification.
+
 # Кнопка
 ## 1. Процессор и радиотракт. Возможно совмещенный
 Кнопка - механическая
