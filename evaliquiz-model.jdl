@@ -37,6 +37,7 @@ enum RoundStatus {
   IDLE,
   READY,
   STARTED,
+  ANSWERED,
   FINISHED
 }
 
@@ -201,7 +202,7 @@ filter Quiz, Question, Game, Round, Attempt, Team
   2. Minimum one member per team
   3. Only the captain may submit answers
   4. Attempt.correct can only be set when Attempt.chosen is true
-  5. Round status transitions: IDLE -> READY -> STARTED -> FINISHED
+  5. Round status transitions: IDLE -> READY -> STARTED -> ANSWERED -> FINISHED
   6. Round.startedAt is set when status transitions to STARTED
   7. Round.finishedAt is set when status transitions to FINISHED
   8. Round.question and Round.questionText are mutually exclusive:
