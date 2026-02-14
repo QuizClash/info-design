@@ -1,6 +1,6 @@
 # Serial (USB-to-UART) communication
 
-Description of the serial communication protocol between Host and Master Station.
+Description of the serial communication protocol between Companion and Master Station.
 
 ## Commands
 

@@ -30,9 +30,7 @@ enum GameStatus {
   CREATED,
   /* IN_PROGRESS means the game can run rounds */
   IN_PROGRESS,
-  FINISHED,
-  /* ABANDONED means canceled at any stage */
-  ABANDONED
+  FINISHED
 }
 
 enum RoundStatus {
@@ -84,6 +82,8 @@ entity Game {
   /* timeout to wait for the reaction during round */
   roundTimeout Integer required
   finishedAt Instant
+  /* Label serves as title for ad-hoc games without quiz */
+  label String
 }
 
 entity Round {

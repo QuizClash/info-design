@@ -74,8 +74,10 @@ The moderator via a mini-app in EvaliquizModeratorBot can do the following actio
 The game consists of rounds.
 The round has the following states:
 - idle (buzzing in causes green blinking)
-- ready (buzzing in is a false start, red blinking, and the round is skipped unless allowed by the moderator)
+- ready (buzzing in is a false start, red blinking, and the round has failed for the captain)
 - started (buzzing in indicates a valid attempt to answer the question)
+- answered (buzzing in indicates a wrong answer, red blinking, and the round has failed for the captain)
+- finished (buzzing in causes green blinking)
   
 The moderator via a mini-app in EvaliquizModeratorBot can choose the state of the round.
 The moderator selects 'ready' and reads the question.
@@ -85,6 +87,47 @@ The moderator can see the sequence of the captains.
 The moderator can choose which captain is to answer the question.
 When the answer was wrong, the moderator may either repeat the same question in another round
 or select another captain to answer.
+
+## State machines
+
+### Game state machine
+
+```
+CREATED → IN_PROGRESS → FINISHED
+```
+Only one Game can be in progress at a time.
+The Game is in progress, Buzzer may connect, and users may access the Game via Telegram bot
+
+| From | To | Trigger                | Side effects                                       |
+|:-----|:---|:-----------------------|:---------------------------------------------------|
+| CREATED | IN_PROGRESS | Moderator action in UI |                                                    |
+| IN_PROGRESS | FINISHED | Moderator action in UI |                                                    |
+
+### Round state machine
+
+```
+IDLE → READY → STARTED → ANSWERED → FINISHED
+```
+
+The moderator explicitly creates a new round entity in the IDLE state.
+
+Round is considered answered when (Buzzed in done):
+- all captains buzzed in
+- timeout reached and at least one captain buzzed in
+- moderator explicitly set the round to FINISHED
+
+The moderator can explicitly set the round to READY at any time, regardless of the current state (to repeat a failed round).
+The moderator can explicitly set the round to FINISHED at any time, regardless of the current state.
+
+| From | To | Trigger                | Side effects |
+|:-----|:---|:-----------------------|:-------------|
+| IDLE | READY | Moderator action in UI | |
+| READY | STARTED | Moderator action in UI | |
+| STARTED | ANSWERED | Buzzed in done         | |
+| ANSWERED | FINISHED | Moderator action in UI | |
+| IDLE | FINISHED | Moderator action in UI | |
+| READY | FINISHED | Moderator action in UI | |
+| STARTED | FINISHED | Moderator action in UI | |
 
 ## Scoring
 
