@@ -22,10 +22,10 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 | Operation | Moderator | Companion | Notes |
 |:----------|:----------|:----------|:------|
-| Create    |           | --        |       |
+| Create    | --        | --        | Auto-created on Telegram registration |
 | Read      | O         | --        |       |
 | Update    | O         | --        |       |
-| Delete    |           |           |       |
+| Delete    | --        | --        | Admin only. Prefer disabling over deleting |
 
 ### Quiz
 
@@ -52,7 +52,7 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 | Create    | O         | --        |       |
 | Read      | O         | --        |       |
 | Update    | O         | --        |       |
-| Delete    |           | --        |       |
+| Delete    | O         | --        | Only CREATED or FINISHED games |
 
 ### Team
 
@@ -79,7 +79,7 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 | Create    | O         | --        | Game must belong to moderator |
 | Read      | O         | --        |       |
 | Update    | O         | --        | Status transitions only |
-| Delete    |           | --        |       |
+| Delete    | O         | --        |       |
 
 ### Attempt
 
