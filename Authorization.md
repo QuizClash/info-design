@@ -65,12 +65,12 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 ### TeamMember
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | O         | --        | Team must belong to moderator's game |
-| Read      | O         | --        |       |
-| Update    | O         | --        |       |
-| Delete    | O         | --        |       |
+| Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
+|:----------|:----------|:----------|:-----------------|:------|
+| Create    | O         | --        | --               | Team must belong to moderator's game |
+| Read      | O         | --        | O                | TeamBot: read-only for active game |
+| Update    | O         | --        | --               |       |
+| Delete    | O         | --        | --               | Not allowed while game is IN_PROGRESS |
 
 ### Round
 

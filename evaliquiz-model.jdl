@@ -20,6 +20,7 @@ application {
     languages [en,nl]
     reactive false
   }
+  entities *
 }
 
 /* =======================
