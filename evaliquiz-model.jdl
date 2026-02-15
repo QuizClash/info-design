@@ -78,10 +78,11 @@ entity TeamMember {
 }
 
 entity Game {
-  startedAt Instant required
   status GameStatus required
   /* timeout to wait for the reaction during round */
   roundTimeout Integer required
+  /* the moment when game became IN_PROGRESS */
+  startedAt Instant
   finishedAt Instant
   /* Label serves as title for ad-hoc games without quiz */
   label String

@@ -47,12 +47,12 @@ The messages from USB-to-UART are relayed to the HTTP server.
 
 #### Push endpoint
 
-The URL is `http://localhost:8080/api/v1/hall/push/<quiz-id>/`.
+The URL is `http://localhost:8080/api/v1/hall/push/<game-id>/`.
 All the JSON events received via serial are pushed to this endpoint.
 
 #### Long-polling endpoint
 
-The URL is `http://localhost:8080/api/v1/hall/poll/<quiz-id>`.
+The URL is `http://localhost:8080/api/v1/hall/poll/<game-id>`.
 
-The host keeps a long-polling HTTP connection to the QuizHall server to get
+The Companion keeps a long-polling HTTP connection to the QuizHall server to get
 the commands to send them to the ESP32 master station over serial.

@@ -85,7 +85,7 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 | Operation | Moderator | Companion | Notes |
 |:----------|:----------|:----------|:------|
-| Create    | --        | 0         | Created when captain buzzes in |
+| Create    | --        | O         | Created when captain buzzes in |
 | Read      | O         | --        |       |
 | Update    | O         | --        | Only `chosen` and `correct` fields |
 | Delete    | O         | --        |       |
