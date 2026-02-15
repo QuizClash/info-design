@@ -79,7 +79,7 @@ entity TeamMember {
 
 entity Game {
   status GameStatus required
-  /* timeout to wait for the reaction during round */
+  /* Timeout in seconds to wait for attempts during a round */
   roundTimeout Integer required
   /* the moment when game became IN_PROGRESS */
   startedAt Instant
@@ -199,14 +199,22 @@ filter Quiz, Question, Game, Round, Attempt, Team
 
 /*
   Business rules to enforce in service code (not expressible in JDL):
-  1. Exactly one captain per team
+  1. Exactly one captain per team (cannot be changed while game is IN_PROGRESS)
   2. Minimum one member per team
-  3. Only the captain may submit answers
+  3. Only the captain may submit answers (create Attempts)
   4. Attempt.correct can only be set when Attempt.chosen is true
   5. Round status transitions: IDLE -> READY -> STARTED -> ANSWERED -> FINISHED
+     Moderator can also transition to READY or FINISHED from any state (override).
+     Transitioning to READY deletes existing attempts for the round.
   6. Round.startedAt is set when status transitions to STARTED
   7. Round.finishedAt is set when status transitions to FINISHED
   8. Round.question and Round.questionText are mutually exclusive:
      - When Game.quiz is set: Round.question must reference a Question from that quiz; Round.questionText must be null
      - When Game.quiz is null: Round.questionText is used; Round.question must be null
+     - A round may have both null (question not yet assigned); this is valid while status is IDLE
+  9. Only one Attempt per team per round
+  10. Only one Game per moderator can be IN_PROGRESS at a time
+  11. A Quiz cannot be deleted if any Game references it (regardless of game status)
+  12. Teams cannot be added/removed while game is IN_PROGRESS
+  13. Team members cannot be removed while game is IN_PROGRESS (adding is allowed)
 */

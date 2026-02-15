@@ -47,21 +47,21 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 ### Game
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | O         | --        |       |
-| Read      | O         | --        |       |
-| Update    | O         | --        |       |
-| Delete    | O         | --        | Only CREATED or FINISHED games |
+| Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
+|:----------|:----------|:----------|:-----------------|:------|
+| Create    | O         | --        | --               |       |
+| Read      | O         | --        | O                | TeamBot: read-only access to IN_PROGRESS game |
+| Update    | O         | --        | --               |       |
+| Delete    | O         | --        | --               | Only CREATED or FINISHED games |
 
 ### Team
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | O         | --        | Game must belong to moderator |
-| Read      | O         | --        |       |
-| Update    | O         | --        |       |
-| Delete    | O         | --        |       |
+| Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
+|:----------|:----------|:----------|:-----------------|:------|
+| Create    | O         | --        | --               | Game must belong to moderator |
+| Read      | O         | --        | O                | TeamBot: read-only access to teams of IN_PROGRESS game |
+| Update    | O         | --        | --               |       |
+| Delete    | O         | --        | --               |       |
 
 ### TeamMember
 
@@ -74,21 +74,21 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 ### Round
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | O         | --        | Game must belong to moderator |
-| Read      | O         | --        |       |
-| Update    | O         | --        | Status transitions only |
-| Delete    | O         | --        |       |
+| Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
+|:----------|:----------|:----------|:-----------------|:------|
+| Create    | O         | --        | --               | Game must belong to moderator |
+| Read      | O         | --        | O                | TeamBot: read-only access to rounds of IN_PROGRESS game |
+| Update    | O         | --        | --               | Status transitions only |
+| Delete    | O         | --        | --               |       |
 
 ### Attempt
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | --        | O         | Created when captain buzzes in |
-| Read      | O         | --        |       |
-| Update    | O         | --        | Only `chosen` and `correct` fields |
-| Delete    | O         | --        |       |
+| Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
+|:----------|:----------|:----------|:-----------------|:------|
+| Create    | --        | O         | O                | Companion: hardware buzzer path. TeamBot: mini-app buzzer path |
+| Read      | O         | --        | O                | TeamBot: read-only access to attempts for the active game |
+| Update    | O         | --        | --               | Only `chosen` and `correct` fields |
+| Delete    | O         | --        | --               |       |
 
 ### Companion
 
@@ -102,5 +102,5 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 ## Data consistency
 
 - A moderator cannot delete a Game that is IN_PROGRESS (only CREATED/FINISHED)
-- A moderator cannot delete a Quiz that has been used in a Game
+- A moderator cannot delete a Quiz that is referenced by any Game (regardless of game status)
 - A moderator can update a Quiz/Question while a Game referencing it is IN_PROGRESS

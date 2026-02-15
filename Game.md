@@ -82,7 +82,7 @@ The round has the following states:
 The moderator via a mini-app in EvaliquizModeratorBot can choose the state of the round.
 The moderator selects 'ready' and reads the question.
 The moderator selects 'started' and waits for the captains to answer.
-The started round finishes when all the captains pressed the buzzer or timeout is reached.
+The round transitions to ANSWERED when the 'Buzzed in done' condition is met (see Round state machine below).
 The moderator can see the sequence of the captains.
 The moderator can choose which captain is to answer the question.
 When the answer was wrong, the moderator may either repeat the same question in another round
@@ -95,7 +95,7 @@ or select another captain to answer.
 ```
 CREATED → IN_PROGRESS → FINISHED
 ```
-Only one Game can be in progress at a time.
+Only one Game per moderator can be in progress at a time.
 The Game is in progress, Buzzer may connect, and users may access the Game via Telegram bot
 
 | From | To | Trigger                | Side effects                                       |
@@ -114,7 +114,9 @@ The moderator explicitly creates a new round entity in the IDLE state.
 Round is considered answered when (Buzzed in done):
 - all captains buzzed in
 - timeout reached and at least one captain buzzed in
-- moderator explicitly set the round to FINISHED
+
+If timeout is reached and no captain has buzzed in, the round remains in STARTED.
+The moderator must explicitly transition it to FINISHED or READY.
 
 The moderator can explicitly set the round to READY at any time, regardless of the current state (to repeat a failed round).
 The moderator can explicitly set the round to FINISHED at any time, regardless of the current state.
@@ -128,6 +130,34 @@ The moderator can explicitly set the round to FINISHED at any time, regardless o
 | IDLE | FINISHED | Moderator action in UI | |
 | READY | FINISHED | Moderator action in UI | |
 | STARTED | FINISHED | Moderator action in UI | |
+| STARTED | READY | Moderator action in UI | Resets the round; existing attempts are deleted |
+| ANSWERED | READY | Moderator action in UI | Replays the round; existing attempts are deleted |
+| FINISHED | READY | Moderator action in UI | Reopens the round; existing attempts are deleted |
+
+### Round timeout
+
+`Game.roundTimeout` is in seconds.
+
+The server tracks the timeout. When a round transitions to STARTED, the server records `Round.startedAt`.
+The server monitors the elapsed time:
+
+- If `roundTimeout` seconds have passed **and** at least one Attempt exists → the round auto-transitions to ANSWERED
+- If `roundTimeout` seconds have passed **and** no Attempts exist → the round remains in STARTED; the moderator must manually transition it
+
+The moderator's mini-app displays a countdown timer derived from `Game.roundTimeout` and `Round.startedAt`.
+
+### Attempt creation
+
+An Attempt is created when a captain buzzes in. There are two paths:
+
+**Hardware path** (Companion): Button press → ESP-NOW → Master Station → Serial → Companion app → HTTP POST to backbone → Attempt created. The button `id` maps to a Team via `Team.index`. This mapping is established during in-place buzzer preparation.
+
+**Mini-app path** (no hardware): Captain taps the buzzer button in the EvaliquizTeamBot mini-app → EvaliquizTeamBot service account sends POST to backbone → Attempt created. `Attempt.receivedAt` is set by the server on receipt. `Attempt.reaction` is null (no hardware timing).
+
+In both cases:
+- An Attempt can only be created when the round is in STARTED status
+- Only one Attempt per team per round is allowed
+- The moderator cannot create Attempts directly
 
 ## Scoring
 
