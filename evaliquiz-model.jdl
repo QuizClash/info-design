@@ -49,6 +49,12 @@ enum RoundStatus {
 /** An identity to run Quiz  */
 entity ModeratorProfile {
   telegram String required
+  /** Whether the moderator has voluntarily disabled their account */
+  enabled Boolean required
+  /** Admin-imposed block preventing system access */
+  blocked Boolean required
+  /** Free-text note visible only to the system admin */
+  label String
 }
 
 entity Quiz {

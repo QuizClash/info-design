@@ -77,17 +77,35 @@ Client→server actions (state transitions, attempt creation) use regular REST c
 - `GET /api/games/{id}/events` — moderator subscribes to all events for their game (requires Moderator JWT)
 - `GET /api/games/{id}/team-events` — team members subscribe to game events (requires EvaliquizTeamBot JWT; question hints are excluded)
 
+## Admin
+
+System administrators can manage the system through the JHipster administrator UI.
+The admin can:
+- create any entity
+- update any entity
+- delete any entity
+- enable/disable moderator
+- add label to moderator
+- block moderator
+
 ## Telegram Bots
 
 ### EvaliquizModeratorBot
 
 The moderator interacts with backbone exclusively through a Telegram mini-app launched from EvaliquizModeratorBot.
+The backbone has dedicated endpoints '/moderator/*' to serve the mini-app for moderator to implement
+all the business logic related to moderation of quizzes, games, and teams.
 
 **Registration flow:**
 1. User opens EvaliquizModeratorBot in Telegram
-2. Bot sends `/start` → backbone creates a `User` entity and `ModeratorProfile` linked to the Telegram ID
+2. Bot sends `/start` → backbone either creates a new `User` + `ModeratorProfile` (with `enabled=true`, `blocked=false`), or re-enables an existing self-disabled profile. If the profile is **blocked**, the bot informs the moderator and denies access.
 3. Backbone issues a JWT for the moderator
 4. Mini-app uses this JWT for all backbone REST calls
+
+**Disable flow:**
+1. Moderator opens EvaliquizModeratorBot in Telegram
+2. Moderator sends `/disable` → backbone sets `enabled=false` on the moderator's profile. Data is preserved but the moderator cannot access any entity.
+3. Moderator can re-enable access by sending `/start` again (triggers the registration flow, which sets `enabled=true`)
 
 **Mini-app views:**
 - **Quizzes**: CRUD for quizzes and questions

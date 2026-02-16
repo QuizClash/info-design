@@ -20,12 +20,19 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 ### ModeratorProfile
 
-| Operation | Moderator | Companion | Notes |
-|:----------|:----------|:----------|:------|
-| Create    | --        | --        | Auto-created on Telegram registration |
-| Read      | O         | --        |       |
-| Update    | O         | --        |       |
-| Delete    | --        | --        | Admin only. Prefer disabling over deleting |
+| Operation | Moderator | Admin | Notes |
+|:----------|:----------|:------|:------|
+| Create    | --        | --    | Auto-created on Telegram registration |
+| Read      | O         | All   | Admin sees all profiles including `label` |
+| Update    | O         | All   | Moderator: can only set `enabled` to `false` (self-disable). Admin: can set `blocked`, `label`, re-enable `enabled` |
+| Delete    | --        | All   | Hard delete by admin only |
+
+> **Access control on disabled / blocked moderators**
+>
+> - When `enabled = false` (self-disabled): the moderator cannot access any entity. Data is preserved. Admin can re-enable.
+> - When `blocked = true` (admin-blocked): the moderator cannot access any entity. Data is preserved. Only admin can unblock.
+> - A moderator who is blocked cannot self-disable or self-enable.
+> - A disabled moderator can re-enable themselves by opening the bot again (triggering the registration flow, which sets `enabled = true`).
 
 ### Quiz
 
