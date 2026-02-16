@@ -10,7 +10,7 @@ The flow:
 1. Mini app gets initData from Telegram bot
 2. Mini app sends a request to the backend with the initData
 3. Backend verifies Telegram signature (using bot token secret)
-4. Backend finds the ModeratorProfile in the database matching the Telegram ID (and connected user ID)
+4. Backend finds the TelegramProfile in the database matching the Telegram ID (and connected user ID)
 5. The backend generates a JWT session token, signs it with the backend secret: 
     ```json
     {
@@ -32,6 +32,15 @@ The flow:
     Authorization: Bearer eyJhbGciOi...
     ```
 
-This is not implemented yet but may be in the future: 
+This is not implemented yet but may be in the future:
 - The token refresh pattern (access token and refresh token)
 - Prevent replay attacks: store the last auth_date per user and reject older ones
+
+## EvaliquizTeamBot
+
+Team member authentication flow:
+
+1. Team member opens a deep link → Telegram sends initData to EvaliquizTeamBot
+2. TeamBot verifies the Telegram signature (using the TeamBot token secret)
+3. TeamBot finds or creates a `TelegramProfile` + `User` for the Telegram ID
+4. TeamBot creates a `TeamMember` linked to the `TelegramProfile`

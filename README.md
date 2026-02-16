@@ -43,7 +43,6 @@ Captain:
 - buzzes in
 
 Team Member:
-- it is anonymous, and it is not connected to its Telegram ID
 - answer questions
 - observe the results of buzzing in
 
@@ -98,7 +97,7 @@ all the business logic related to moderation of quizzes, games, and teams.
 
 **Registration flow:**
 1. User opens EvaliquizModeratorBot in Telegram
-2. Bot sends `/start` → backbone either creates a new `User` + `ModeratorProfile` (with `enabled=true`, `blocked=false`), or re-enables an existing self-disabled profile. If the profile is **blocked**, the bot informs the moderator and denies access.
+2. Bot sends `/start` → backbone either creates a new `User` + `TelegramProfile` (with `enabled=true`, `blocked=false`), or re-enables an existing self-disabled profile. If the profile is **blocked**, the bot informs the moderator and denies access.
 3. Backbone issues a JWT for the moderator
 4. Mini-app uses this JWT for all backbone REST calls
 
@@ -116,11 +115,11 @@ all the business logic related to moderation of quizzes, games, and teams.
 
 ### EvaliquizTeamBot
 
-The team bot provides game access to team members without backbone authentication. Team members are anonymous — the bot mediates all backbone access.
+The team bot provides game access to team members. The bot mediates all backbone access.
 
 **Joining flow:**
 1. Moderator shares a deep link: `https://t.me/EvaliquizTeamBot?start=game_<gameId>_team_<teamId>`
-2. Team member opens the link → bot registers them as a `TeamMember` (anonymous, `captain=false`)
+2. Team member opens the link → bot finds or creates a `TelegramProfile` + `User` for the Telegram ID, then registers them as a `TeamMember` (`captain=false`) linked to the `TelegramProfile`
 3. Bot returns a mini-app link for the team view
 
 **Captain designation:**

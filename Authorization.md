@@ -4,7 +4,7 @@
 
 | Actor | Authentication | Description                                                                                                |
 |:------|:---------------|:-----------------------------------------------------------------------------------------------------------|
-| **Moderator** | Telegram → backbone JWT | Authenticated user with a `ModeratorProfile`. Accesses backbone via EvaliquizModeratorBot mini-app.        |
+| **Moderator** | Telegram → backbone JWT | Authenticated user with a `TelegramProfile`. Accesses backbone via EvaliquizModeratorBot mini-app.        |
 | **Companion** | JWT signed with `Companion.secret` | Software on phone/host that relays buzzer events.                                                          |
 | **Team member** | None (anonymous) | No direct backbone authentication. Interacts only through EvaliquizTeamBot.                                |
 | **EvaliquizTeamBot** | Telegram → backbone JWT | Service account for read access to game state (rounds, attempts, teams) and to send attempt without buzzer |
@@ -18,14 +18,14 @@ There is no cross-moderator visibility.
 
 Legend: **O** = own only, **--** = no access, **?** = to be decided
 
-### ModeratorProfile
+### TelegramProfile
 
-| Operation | Moderator | Admin | Notes |
-|:----------|:----------|:------|:------|
-| Create    | --        | --    | Auto-created on Telegram registration |
-| Read      | O         | All   | Admin sees all profiles including `label` |
-| Update    | O         | All   | Moderator: can only set `enabled` to `false` (self-disable). Admin: can set `blocked`, `label`, re-enable `enabled` |
-| Delete    | --        | All   | Hard delete by admin only |
+| Operation | Moderator | EvaliquizTeamBot | Admin | Notes |
+|:----------|:----------|:-----------------|:------|:------|
+| Create    | --        | O                | --    | Auto-created on Telegram registration. TeamBot: auto-created on team join |
+| Read      | O         | --               | All   | Admin sees all profiles including `label` |
+| Update    | O         | --               | All   | Moderator: can only set `enabled` to `false` (self-disable). Admin: can set `blocked`, `label`, re-enable `enabled` |
+| Delete    | --        | --               | All   | Hard delete by admin only |
 
 > **Access control on disabled / blocked moderators**
 >
@@ -74,7 +74,7 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 | Operation | Moderator | Companion | EvaliquizTeamBot | Notes |
 |:----------|:----------|:----------|:-----------------|:------|
-| Create    | O         | --        | --               | Team must belong to moderator's game |
+| Create    | O         | --        | O                | Team must belong to moderator's game. TeamBot: also creates (along with TelegramProfile) |
 | Read      | O         | --        | O                | TeamBot: read-only for active game |
 | Update    | O         | --        | --               |       |
 | Delete    | O         | --        | --               | Not allowed while game is IN_PROGRESS |

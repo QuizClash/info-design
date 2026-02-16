@@ -46,10 +46,10 @@ enum RoundStatus {
    ENTITIES
 ======================= */
 
-/** An identity to run Quiz  */
-entity ModeratorProfile {
+/** A Telegram identity linked to a system user */
+entity TelegramProfile {
   telegram String required
-  /** Whether the moderator has voluntarily disabled their account */
+  /** Whether the user has voluntarily disabled their account */
   enabled Boolean required
   /** Admin-imposed block preventing system access */
   blocked Boolean required
@@ -133,15 +133,15 @@ entity Companion {
 ======================= */
 
 relationship OneToOne {
-  ModeratorProfile {person required} to User with builtInEntity
+  TelegramProfile{person required} to User with builtInEntity
 }
 
 relationship OneToMany {
-  ModeratorProfile{companions} to Companion{owner required}
+  TelegramProfile{companions} to Companion{owner required}
 }
 
 relationship OneToMany {
-  ModeratorProfile{quizzes} to Quiz{author required}
+  TelegramProfile{quizzes} to Quiz{author required}
 }
 
 relationship OneToMany {
@@ -154,10 +154,14 @@ relationship OneToMany {
   Team{members} to TeamMember{team required}
 }
 
+relationship ManyToOne {
+  TeamMember{telegramProfile required} to TelegramProfile
+}
+
 /* --- Game --- */
 
 relationship OneToMany {
-   ModeratorProfile{games} to Game{moderator required}
+  TelegramProfile{games} to Game{moderator required}
 }
 
 relationship OneToMany {
@@ -199,8 +203,8 @@ relationship OneToMany {
    OPTIONS
 ======================= */
 
-dto Quiz, Question, Game, Round, Attempt, Team, TeamMember, Companion, ModeratorProfile with mapstruct
-service Quiz, Question, Game, Round, Attempt, Team, Companion, ModeratorProfile with serviceClass
+dto Quiz, Question, Game, Round, Attempt, Team, TeamMember, Companion, TelegramProfile with mapstruct
+service Quiz, Question, Game, Round, Attempt, Team, Companion, TelegramProfile with serviceClass
 paginate Quiz, Question, Game, Round, Attempt, Team with pagination
 filter Quiz, Question, Game, Round, Attempt, Team
 
