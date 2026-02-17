@@ -80,7 +80,7 @@ Client→server actions (state transitions, attempt creation) use regular REST c
 
 System administrators can manage the system through the JHipster administrator UI.
 The admin can:
-- create any entity
+- create any entity (except TelegramProfile, which is auto-created on Telegram registration)
 - update any entity
 - delete any entity
 - enable/disable moderator
@@ -89,10 +89,13 @@ The admin can:
 
 ## Telegram Bots
 
+This is a functional description of the Telegram bots used in the Evaliquiz application.
+More technical details are in the [TelegramBots](TelegramBots.md) section.
+
 ### EvaliquizModeratorBot
 
 The moderator interacts with backbone exclusively through a Telegram mini-app launched from EvaliquizModeratorBot.
-The backbone has dedicated endpoints '/moderator/*' to serve the mini-app for moderator to implement
+The backbone has dedicated endpoints '/bot_api/v1/*' to serve the mini-app for moderator to implement
 all the business logic related to moderation of quizzes, games, and teams.
 
 **Registration flow:**
@@ -108,8 +111,8 @@ all the business logic related to moderation of quizzes, games, and teams.
 
 **Mini-app views:**
 - **Quizzes**: CRUD for quizzes and questions
-- **Games**: create game, assign quiz, select companion, manage teams
-- **Game lobby**: add teams, add team members, designate captains, start game
+- **Games**: create game, assign quiz, select a companion, manage teams
+- **Game lobby**: add teams, add team members, designate captains, start a game
 - **Live game**: round management (create round, transition states), view attempts, choose captain to answer, judge answers
 - **Game results**: view finished game's rounds and attempts
 
@@ -117,10 +120,18 @@ all the business logic related to moderation of quizzes, games, and teams.
 
 The team bot provides game access to team members. The bot mediates all backbone access.
 
-**Joining flow:**
-1. Moderator shares a deep link: `https://t.me/EvaliquizTeamBot?start=game_<gameId>_team_<teamId>`
+**Joining flow with the team link:**
+1. Moderator shares a deep link: `https://t.me/EvaliquizTeamBot?start=team_<teamId>`
 2. Team member opens the link → bot finds or creates a `TelegramProfile` + `User` for the Telegram ID, then registers them as a `TeamMember` (`captain=false`) linked to the `TelegramProfile`
 3. Bot returns a mini-app link for the team view
+
+
+**Joining flow with the moderator link:**
+1. Moderator shares a deep link: `https://t.me/EvaliquizTeamBot?start=moderator<Moderator user ID>`
+2. Team member opens the link → bot finds or creates a `TelegramProfile` + `User` for the Telegram ID
+3. The backend finds an existing `Game` with the same `moderator.id` and status IN_PROGRESS (the bot should show "No game in progress" if there is none)
+4. Bot returns a mini-app link for the game view
+5. Team member must first select the team, and he is registered as a `TeamMember` (`captain=false`) linked to the `TelegramProfile`
 
 **Captain designation:**
 The moderator designates the captain through EvaliquizModeratorBot by setting `TeamMember.captain = true`. Only one captain per team is allowed (enforced by the service layer).
@@ -135,10 +146,10 @@ Team members can see through the mini-app:
 **Mini-app buzzing (non-hardware path):**
 1. Captain sees a buzzer button in the mini-app (active only when round is STARTED)
 2. Captain taps the button → mini-app sends request to EvaliquizTeamBot backend
-3. EvaliquizTeamBot sends `POST /api/attempts` to backbone with its service JWT
+3. EvaliquizTeamBot sends `POST /bot_api/v1/rest/attempts` to backbone with its service JWT
 4. Backbone sets `Attempt.receivedAt` to server time; `Attempt.reaction` is null
 
-### Team and captain management during game
+### Team and captain management during a game
 
 - The captain cannot be changed while the game is IN_PROGRESS
 - Team members can be added during an IN_PROGRESS game (late joiners)

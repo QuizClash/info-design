@@ -5,7 +5,7 @@ For the UI, this project is heavily using Telegram bots and mini-app.
 Thus, all the users are expected to have Telegram installed and
 configured to play.
 
-## Staged
+## Stages
 
 1. Preliminary preparation (once)
 2. Quiz preparation
