@@ -32,6 +32,9 @@ The flow:
     Authorization: Bearer eyJhbGciOi...
     ```
 
+Until the token refresh pattern is implemented, 
+the JWT token expires after 12 hours to avoid expiration during long games.
+
 This is not implemented yet but may be in the future:
 - The token refresh pattern (access token and refresh token)
 - Prevent replay attacks: store the last auth_date per user and reject older ones
