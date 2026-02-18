@@ -49,10 +49,6 @@ enum RoundStatus {
 /** A Telegram identity linked to a system user */
 entity TelegramProfile {
   telegram String required
-  /** Whether the user has voluntarily disabled their account */
-  enabled Boolean required
-  /** Admin-imposed block preventing system access */
-  blocked Boolean required
   /** Free-text note visible only to the system admin */
   label String
 }
