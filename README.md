@@ -83,9 +83,8 @@ The admin can:
 - create any entity (except TelegramProfile, which is auto-created on Telegram registration)
 - update any entity
 - delete any entity
-- enable/disable moderator
+- activate/deactivate moderator (any user)
 - add label to moderator
-- block moderator
 
 ## Telegram Bots
 
@@ -100,14 +99,9 @@ all the business logic related to moderation of quizzes, games, and teams.
 
 **Registration flow:**
 1. User opens EvaliquizModeratorBot in Telegram
-2. Bot sends `/start` → backbone either creates a new `User` + `TelegramProfile` (with `enabled=true`, `blocked=false`), or re-enables an existing self-disabled profile. If the profile is **blocked**, the bot informs the moderator and denies access.
+2. Bot sends `/start` → backbone either creates a new `User` + `TelegramProfile`, or finds an existing profile. If `User.activated = false`, the bot informs the moderator and denies access.
 3. Backbone issues a JWT for the moderator
 4. Mini-app uses this JWT for all backbone REST calls
-
-**Disable flow:**
-1. Moderator opens EvaliquizModeratorBot in Telegram
-2. Moderator sends `/disable` → backbone sets `enabled=false` on the moderator's profile. Data is preserved but the moderator cannot access any entity.
-3. Moderator can re-enable access by sending `/start` again (triggers the registration flow, which sets `enabled=true`)
 
 **Mini-app views:**
 - **Quizzes**: CRUD for quizzes and questions

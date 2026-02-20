@@ -14,13 +14,12 @@ Companion documents:
 
 ### @EvaliquizModeratorBot
 
-**Purpose:** Moderator registration, self-disable, and mini-app launcher.
+**Purpose:** Moderator registration and mini-app launcher.
 
 **Commands:**
 | Command | Description |
 |---------|-------------|
-| `/start` | Register or re-enable moderator profile |
-| `/disable` | Self-disable moderator profile (data preserved) |
+| `/start` | Register moderator profile |
 
 **Menu Button:** Opens the moderator mini-app (see [ModeratorMiniApp.md](ModeratorMiniApp.md)).
 
@@ -51,8 +50,7 @@ Companion documents:
 2. Copy the bot token (see [Backend setup](#setup--backend) below)
 3. `/setcommands` for @EvaliquizModeratorBot:
    ```
-   start - Register or re-enable your moderator profile
-   disable - Disable your moderator profile
+   start - Register your moderator profile
    ```
 4. `/setmenubutton` — set the Web App URL to the moderator mini-app (e.g. `https://app.evaliquiz.example/moderator`)
 5. Bot Settings → Domain — add the mini-app domain so Telegram allows the Web App to open

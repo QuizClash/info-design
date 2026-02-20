@@ -418,7 +418,7 @@ Accessible from Home → "Companions". Simple CRUD — not a game-session screen
 
 | Entity | Create | Read | Update | Delete | Screen(s) |
 |--------|--------|------|--------|--------|-----------|
-| TelegramProfile | — | Home (display name) | — (self-disable via bot `/disable`, not mini-app) | — | 1 |
+| TelegramProfile | — | Home (display name) | — | — | 1 |
 | Quiz | Quiz List | Quiz List, Quiz Detail | Quiz Detail | Quiz List, Quiz Detail | 2, 3 |
 | Question | Quiz Detail | Quiz Detail, Question Edit | Question Edit | Quiz Detail, Question Edit | 3, 4 |
 | Game | Game Create | Game List, Lobby, Live, Results | Game Create/Edit, Live Game (status) | Game List, Game Results | 5–9 |
