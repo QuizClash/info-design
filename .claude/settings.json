@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "../backbone/",
+      "../miniapps/",
+      "../terravessel/"
+    ]
+  }
+}
