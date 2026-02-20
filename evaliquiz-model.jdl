@@ -48,20 +48,20 @@ enum RoundStatus {
 
 /** A Telegram identity linked to a system user */
 entity TelegramProfile {
-  telegram String required
+  telegram String required maxlength(25)
   /** Free-text note visible only to the system admin */
-  label String
+  label String maxlength(255)
 }
 
 entity Quiz {
   createdAt Instant required
-  title String required
+  title String required maxlength(255)
   description TextBlob
 }
 
 entity Question {
   orderIndex Integer required
-  title String
+  title String maxlength(255)
   text TextBlob
   /* Hint is only shown to the moderator */
   hint TextBlob
@@ -70,25 +70,25 @@ entity Question {
 /** A group of players that participates in quizzes together */
 entity Team {
   index Integer required
-  name String
+  name String maxlength(100)
 }
 
 /** A user's membership in a team */
 entity TeamMember {
   /** Whether this member answers on behalf of the team */
   captain Boolean required
-  name String
+  name String maxlength(100)
 }
 
 entity Game {
   status GameStatus required
   /* Timeout in seconds to wait for attempts during a round */
-  roundTimeout Integer required
+  roundTimeout Integer required min(1) max(300)
   /* the moment when game became IN_PROGRESS */
   startedAt Instant
   finishedAt Instant
   /* Label serves as title for ad-hoc games without quiz */
-  label String
+  label String maxlength(255)
 }
 
 entity Round {
@@ -97,7 +97,7 @@ entity Round {
   finishedAt Instant
   orderIndex Integer required
   /* Ad-hoc question text entered by the moderator when the game has no quiz */
-  questionText String
+  questionText String maxlength(1000)
 }
 
 entity Attempt {
@@ -115,13 +115,13 @@ entity Attempt {
 entity Companion {
   /** Communicated in lower case */
   uuid UUID required
-  name String required
+  name String required maxlength(255)
   /** UUID 4 as secret */
   secret String required maxlength(36)
   /** The version of the installed software package */
   edition Integer
   /** General description */
-  description String
+  description String maxlength(255)
 }
 
 /* =======================
@@ -202,7 +202,7 @@ relationship OneToMany {
 dto Quiz, Question, Game, Round, Attempt, Team, TeamMember, Companion, TelegramProfile with mapstruct
 service Quiz, Question, Game, Round, Attempt, Team, Companion, TelegramProfile with serviceClass
 paginate Quiz, Question, Game, Round, Attempt, Team with pagination
-filter Quiz, Question, Game, Round, Attempt, Team
+filter Quiz, Question, Game, Round, Attempt, Team, TeamMember, Companion, TelegramProfile
 
 /*
   Business rules to enforce in service code (not expressible in JDL):

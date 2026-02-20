@@ -72,6 +72,21 @@ Client→server actions (state transitions, attempt creation) use regular REST c
 - `attempt-update` — moderator set `chosen` or `correct` on an attempt
 - `game-status` — game state transitions (CREATED → IN_PROGRESS → FINISHED)
 
+**SSE event payloads:**
+
+| Event | Payload | When |
+|-------|---------|------|
+| `round-status` | `RoundDTO` (full) | Round status changes (IDLE→READY, READY→STARTED, etc.) |
+| `attempt` | `AttemptDTO` (full) | New attempt created (captain buzzed in) |
+| `attempt-update` | `AttemptDTO` (full) | Moderator set `chosen` or `correct` |
+| `game-status` | `GameDTO` (full) | Game status changes (CREATED→IN_PROGRESS, IN_PROGRESS→FINISHED) |
+
+Each SSE message uses the standard `text/event-stream` format:
+```
+event: round-status
+data: {"id":42,"status":"STARTED","startedAt":"2026-02-20T14:00:00Z",...}
+```
+
 **SSE endpoints:**
 - `GET /api/games/{id}/events` — moderator subscribes to all events for their game (requires Moderator JWT)
 - `GET /api/games/{id}/team-events` — team members subscribe to game events (requires EvaliquizTeamBot JWT; question hints are excluded)
