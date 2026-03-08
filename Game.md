@@ -5,7 +5,7 @@ For the UI, this project is heavily using Telegram bots and mini-app.
 Thus, all the users are expected to have Telegram installed and
 configured to play.
 
-## Staged
+## Stages
 
 1. Preliminary preparation (once)
 2. Quiz preparation
@@ -87,6 +87,9 @@ The moderator can see the sequence of the captains.
 The moderator can choose which captain is to answer the question.
 When the answer was wrong, the moderator may either repeat the same question in another round
 or select another captain to answer.
+
+If the moderator loses the connection or leaves the game, the game remains IN_PROGRESS and can be resumed when the moderator reconnects.
+The moderator can open the mini-app on a few devices and see the progress of the game.
 
 ## State machines
 

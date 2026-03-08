@@ -8,6 +8,7 @@
 | **Companion** | JWT signed with `Companion.secret` | Software on phone/host that relays buzzer events.                                                          |
 | **Team member** | None (anonymous) | No direct backbone authentication. Interacts only through EvaliquizTeamBot.                                |
 | **EvaliquizTeamBot** | Telegram → backbone JWT | Service account for read access to game state (rounds, attempts, teams) and to send attempt without buzzer |
+| **EvaliquizModeratorBot** | Telegram → backbone JWT | Service account that creates TelegramProfile + User during moderator registration |
 
 ## Scope rule
 
@@ -20,19 +21,14 @@ Legend: **O** = own only, **--** = no access, **?** = to be decided
 
 ### TelegramProfile
 
-| Operation | Moderator | EvaliquizTeamBot | Admin | Notes |
-|:----------|:----------|:-----------------|:------|:------|
-| Create    | --        | O                | --    | Auto-created on Telegram registration. TeamBot: auto-created on team join |
-| Read      | O         | --               | All   | Admin sees all profiles including `label` |
-| Update    | O         | --               | All   | Moderator: can only set `enabled` to `false` (self-disable). Admin: can set `blocked`, `label`, re-enable `enabled` |
-| Delete    | --        | --               | All   | Hard delete by admin only |
+| Operation | Moderator | EvaliquizTeamBot | EvaliquizModeratorBot | Admin | Notes |
+|:----------|:----------|:-----------------|:----------------------|:------|:------|
+| Create    | --        | O                | O                     | --    | Auto-created on Telegram registration. TeamBot: on team join. ModeratorBot: on moderator registration |
+| Read      | O         | --               | --                    | All   | Admin sees all profiles including `label` |
+| Update    | O         | --               | --                    | All   | Moderator: read-only. Admin: can set label, toggle User.activated |
+| Delete    | --        | --               | --                    | All   | Hard delete by admin only |
 
-> **Access control on disabled / blocked moderators**
->
-> - When `enabled = false` (self-disabled): the moderator cannot access any entity. Data is preserved. Admin can re-enable.
-> - When `blocked = true` (admin-blocked): the moderator cannot access any entity. Data is preserved. Only admin can unblock.
-> - A moderator who is blocked cannot self-disable or self-enable.
-> - A disabled moderator can re-enable themselves by opening the bot again (triggering the registration flow, which sets `enabled = true`).
+> When `User.activated = false` (admin-deactivated): the moderator cannot authenticate and cannot access any entity. Data is preserved. Only an admin can reactivate via user management.
 
 ### Quiz
 
